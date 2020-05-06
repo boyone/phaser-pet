@@ -60,36 +60,84 @@ gameScene.create = function() {
 
 // create ui
 gameScene.createUi = function() {
-  // buttons
-  this.appleBtn = this.add.sprite(72, 570, 'apple').setInteractive();
-  this.appleBtn.customStats = {
-    health: 20,
-    fun: 0
-  };
-  this.appleBtn.on('pointerdown', this.pickItem);
-
-  this.candyBtn = this.add.sprite(144, 570, 'candy').setInteractive();
-  this.candyBtn.customStats = {
-    health: -10,
-    fun: 10
-  };
-  this.candyBtn.on('pointerdown', this.pickItem);
-
-  this.toyBtn = this.add.sprite(216, 570, 'toy').setInteractive();
-  this.toyBtn.customStats = {
-    health: 0,
+  this.oneBtn = this.add.sprite(50, 530, 'one').setInteractive();
+  this.oneBtn.customStats = {
+    health: 10,
     fun: 15
   };
-  this.toyBtn.on('pointerdown', this.pickItem);
+  this.oneBtn.on('pointerdown', this.pickItem);
 
-  this.rotateBtn = this.add.sprite(288, 570, 'rotate').setInteractive();
+  this.twoBtn = this.add.sprite(100, 530, 'two').setInteractive();
+  this.twoBtn.customStats = {
+    health: 10,
+    fun: 15
+  };
+  this.twoBtn.on('pointerdown', this.pickItem);
+
+  this.threeBtn = this.add.sprite(150, 530, 'three').setInteractive();
+  this.threeBtn.customStats = {
+    health: 10,
+    fun: 15
+  };
+  this.threeBtn.on('pointerdown', this.pickItem);
+
+  this.fourBtn = this.add.sprite(200, 530, 'four').setInteractive();
+  this.fourBtn.customStats = {
+    health: -10,
+    fun: 15
+  };
+  this.fourBtn.on('pointerdown', this.pickItem);
+
+  this.fiveBtn = this.add.sprite(250, 530, 'five').setInteractive();
+  this.fiveBtn.customStats = {
+    health: -10,
+    fun: 5
+  };
+  this.fiveBtn.on('pointerdown', this.pickItem);
+
+  this.sixBtn = this.add.sprite(50, 580, 'six').setInteractive();
+  this.sixBtn.customStats = {
+    health: -10,
+    fun: 15
+  };
+  this.sixBtn.on('pointerdown', this.pickItem);
+
+  this.sevenBtn = this.add.sprite(100, 580, 'seven').setInteractive();
+  this.sevenBtn.customStats = {
+    health: 10,
+    fun: 15
+  };
+  this.sevenBtn.on('pointerdown', this.pickItem);
+
+  this.eightBtn = this.add.sprite(150, 580, 'eight').setInteractive();
+  this.eightBtn.customStats = {
+    health: -10,
+    fun: 0
+  };
+  this.eightBtn.on('pointerdown', this.pickItem);
+
+  this.nineBtn = this.add.sprite(200, 580, 'nine').setInteractive();
+  this.nineBtn.customStats = {
+    health: 10,
+    fun: 15
+  };
+  this.nineBtn.on('pointerdown', this.pickItem);
+
+  this.zeroBtn = this.add.sprite(250, 580, 'zero').setInteractive();
+  this.zeroBtn.customStats = {
+    health: -10,
+    fun: -15
+  };
+  this.zeroBtn.on('pointerdown', this.pickItem);
+
+  this.rotateBtn = this.add.sprite(300, 570, 'rotate').setInteractive();
   this.rotateBtn.customStats = {
     fun: 20
   };
   this.rotateBtn.on('pointerdown', this.rotatePet);
 
   // array with all buttons
-  this.buttons = [this.appleBtn, this.candyBtn, this.toyBtn, this.rotateBtn];
+  this.buttons = [this.oneBtn, this.twoBtn, this.threeBtn, this.fourBtn, this.fiveBtn, this.sixBtn, this.sevenBtn, this.eightBtn, this.nineBtn, this.zeroBtn, this.rotateBtn];
 
   // ui is not blocked
   this.uiBlocked = false;

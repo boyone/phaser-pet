@@ -47,10 +47,21 @@ loadingScene.preload = function () {
   this.load.image('candy', 'assets/images/candy.png');
   this.load.image('rotate', 'assets/images/rotate.png');
   this.load.image('toy', 'assets/images/rubber_duck.png');
+  
+  this.load.image('zero', 'assets/images/zero-s.png');
+  this.load.image('one', 'assets/images/one-s.png');
+  this.load.image('two', 'assets/images/two-s.png');
+  this.load.image('three', 'assets/images/three-s.png');
+  this.load.image('four', 'assets/images/four-s.png');
+  this.load.image('five', 'assets/images/five-s.png');
+  this.load.image('six', 'assets/images/six-s.png');
+  this.load.image('seven', 'assets/images/seven-s.png');
+  this.load.image('eight', 'assets/images/eight-s.png');
+  this.load.image('nine', 'assets/images/nine-s.png');
 
   // load spritesheet
   this.load.spritesheet('pet', 'assets/images/pet.png', {
-    frameWidth: 97,
+    frameWidth: 97, // 491 = (97 * 5) 485
     frameHeight: 83,
     margin: 1,
     spacing: 1,
