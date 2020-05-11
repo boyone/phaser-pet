@@ -20,24 +20,12 @@ gameScene.init = function() {
 gameScene.create = function() {
 
   // game background
-  let bg = this.add.sprite(0, 0, 'backyard').setInteractive();
+  let bg = this.add.sprite(0, 0, 'backyard');
   bg.setOrigin(0, 0);
 
-  // event listener for the background
-  bg.on('pointerdown', this.placeItem, this);
-
-  this.pet = this.add.sprite(100, 200, 'pet', 0).setInteractive();
-  this.pet.depth = 1;
-
-  // make pet draggable
-  this.input.setDraggable(this.pet);
-
-  // follow pointer (mouse/finger) when dragging
-  this.input.on('drag', function(pointer, gameObject, dragX, dragY) {
-    // make sprite be located at the coordinates of the dragging
-    gameObject.x = dragX;
-    gameObject.y = dragY;
-  });
+  this.kuma = this.add.sprite(120, 200, 'kuma', 4)
+  this.kuma.setScale(0.75);
+  this.kuma.depth = 1;
 
   // create ui
   this.createUi();
@@ -130,55 +118,14 @@ gameScene.createUi = function() {
   };
   this.zeroBtn.on('pointerdown', this.pickItem);
 
-  this.rotateBtn = this.add.sprite(300, 570, 'rotate').setInteractive();
-  this.rotateBtn.customStats = {
-    fun: 20
-  };
-  this.rotateBtn.on('pointerdown', this.rotatePet);
-
   // array with all buttons
-  this.buttons = [this.oneBtn, this.twoBtn, this.threeBtn, this.fourBtn, this.fiveBtn, this.sixBtn, this.sevenBtn, this.eightBtn, this.nineBtn, this.zeroBtn, this.rotateBtn];
+  this.buttons = [this.oneBtn, this.twoBtn, this.threeBtn, this.fourBtn, this.fiveBtn, this.sixBtn, this.sevenBtn, this.eightBtn, this.nineBtn, this.zeroBtn]; // , this.rotateBtn
 
   // ui is not blocked
   this.uiBlocked = false;
 
   // refresh ui
   this.uiReady();
-};
-
-// rotate pet
-gameScene.rotatePet = function() {
-
-  // the ui can't be blocked in order to rotate
-  if (this.scene.uiBlocked) return;
-
-  // make sure the ui is ready
-  this.scene.uiReady();
-
-  // block the ui
-  this.scene.uiBlocked = true;
-
-  // dim the rotate icon
-  this.alpha = 0.5;
-
-  let scene = this.scene;
-
-  // rotation tween
-  let rotateTween = this.scene.tweens.add({
-    targets: this.scene.pet,
-    duration: 600,
-    angle: 720,
-    pause: false,
-    callbackScope: this,
-    onComplete: function(tween, sprites) {
-
-      // update stats
-      this.scene.updateStats(this.customStats);
-
-      // set UI to ready
-      this.scene.uiReady();
-    }
-  });
 };
 
 // pick item
@@ -229,83 +176,33 @@ gameScene.randomItem = function() {
   let randomY = Math.floor(Math.random() * (400 - 25)) + 100;
   let newItem = this.add.sprite(randomX, randomY, this.selectedItem.texture.key);
 
-  // block UI
-  this.uiBlocked = true;
-
-  // pet movement (tween)
-  let petTween = this.tweens.add({
-    targets: this.pet,
-    duration: 500,
-    x: newItem.x,
-    y: newItem.y,
-    paused: false,
-    callbackScope: this,
-    onComplete: function(tween, sprites) {
-
-      // destroy the item
-      newItem.destroy();
-
-      // event listener for when spritesheet animation ends
-      this.pet.on('animationcomplete', function() {
-
-        // set pet back to neutral face
-        this.pet.setFrame(0);
-
-        // clear UI
-        this.uiReady();
-      }, this);
-
-      // play spritesheet animation
-      this.pet.play('funnyfaces');
-
-      // update stats
-      this.updateStats(this.selectedItem.customStats);
-    }
-  });
-};
-
-// place new item on the game
-gameScene.placeItem = function(pointer, localX, localY) {
-  // check that an item was selected
-  if (!this.selectedItem) return;
-
-  // ui must be unblocked
-  if (this.uiBlocked) return;
-
-  // create a new item in the position the player clicked/tapped
-  let newItem = this.add.sprite(localX, localY, this.selectedItem.texture.key);
+  if (newItem.x > this.kuma.x) {
+    this.kuma.play('right');
+  }
+  if (newItem.x < this.kuma.x) {
+    this.kuma.play('left');
+  }
 
   // block UI
   this.uiBlocked = true;
 
   // pet movement (tween)
   let petTween = this.tweens.add({
-    targets: this.pet,
+    targets: this.kuma,
     duration: 500,
     x: newItem.x,
     y: newItem.y,
     paused: false,
     callbackScope: this,
     onComplete: function(tween, sprites) {
-
       // destroy the item
       newItem.destroy();
 
-      // event listener for when spritesheet animation ends
-      this.pet.on('animationcomplete', function() {
-
-        // set pet back to neutral face
-        this.pet.setFrame(0);
-
-        // clear UI
-        this.uiReady();
-      }, this);
-
-      // play spritesheet animation
-      this.pet.play('funnyfaces');
-
+      
       // update stats
       this.updateStats(this.selectedItem.customStats);
+      this.kuma.play('turn');
+      this.uiReady();
     }
   });
 };
@@ -365,7 +262,7 @@ gameScene.gameOver = function() {
   this.uiBlocked = true;
 
   // change frame of the pet
-  this.pet.setFrame(4);
+  //this.pet.setFrame(4);
 
   // keep the game on for a some time, the move on
   this.time.addEvent({

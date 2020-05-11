@@ -47,7 +47,7 @@ loadingScene.preload = function () {
   this.load.image('candy', 'assets/images/candy.png');
   this.load.image('rotate', 'assets/images/rotate.png');
   this.load.image('toy', 'assets/images/rubber_duck.png');
-  
+
   this.load.image('zero', 'assets/images/zero-s.png');
   this.load.image('one', 'assets/images/one-s.png');
   this.load.image('two', 'assets/images/two-s.png');
@@ -63,6 +63,14 @@ loadingScene.preload = function () {
   this.load.spritesheet('pet', 'assets/images/pet.png', {
     frameWidth: 97, // 491 = (97 * 5) 485
     frameHeight: 83,
+    margin: 1,
+    spacing: 1,
+  });
+
+  // load kuma
+  this.load.spritesheet('kuma', 'assets/images/kuma-ani.png', {
+    frameWidth: 123, // 124
+    frameHeight: 162, // 164
     margin: 1,
     spacing: 1,
   });
@@ -83,6 +91,26 @@ loadingScene.create = function () {
     frameRate: 7,
     yoyo: true,
     repeat: 0, // to repeat forever: -1
+  });
+
+  this.anims.create({
+    key: 'left',
+    frames: this.anims.generateFrameNumbers('kuma', { start: 0, end: 3 }),
+    frameRate: 10,
+    repeat: -1,
+  });
+
+  this.anims.create({
+    key: 'turn',
+    frames: [{ key: 'kuma', frame: 4 }],
+    frameRate: 20,
+  });
+
+  this.anims.create({
+    key: 'right',
+    frames: this.anims.generateFrameNumbers('kuma', { start: 5, end: 8 }),
+    frameRate: 10,
+    repeat: -1,
   });
 
   this.scene.start('Home');
