@@ -2,7 +2,7 @@
 let config = {
   type: Phaser.AUTO,
   width: 360,
-  height: 640,
+  height: 550,
   scene: [bootScene, loadingScene, homeScene, gameScene],
   title: 'Virtual Pet',
   pixelArt: false,

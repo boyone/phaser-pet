@@ -42,11 +42,15 @@ loadingScene.preload = function () {
   );
 
   // load assets
-  this.load.image('backyard', 'assets/images/backyard.png');
-  this.load.image('apple', 'assets/images/apple.png');
-  this.load.image('candy', 'assets/images/candy.png');
-  this.load.image('rotate', 'assets/images/rotate.png');
+  this.load.image('backyard', 'assets/images/yellow-bg.png');
   this.load.image('toy', 'assets/images/rubber_duck.png');
+
+  // load json data
+  /*this.load.json('numbers', 'assets/json/numbers.json');
+  let x = this.cache.json.get('numbers');
+  for (let number in x.numbers) {
+    this.load.image(number.key, 'assets/' + number.path);
+  }*/
 
   this.load.image('zero', 'assets/images/zero-s.png');
   this.load.image('one', 'assets/images/one-s.png');
@@ -59,13 +63,19 @@ loadingScene.preload = function () {
   this.load.image('eight', 'assets/images/eight-s.png');
   this.load.image('nine', 'assets/images/nine-s.png');
 
-  // load spritesheet
-  this.load.spritesheet('pet', 'assets/images/pet.png', {
-    frameWidth: 97, // 491 = (97 * 5) 485
-    frameHeight: 83,
-    margin: 1,
-    spacing: 1,
-  });
+  this.load.audio('one', 'assets/audio/1.mp3');
+  this.load.audio('two', 'assets/audio/2.mp3');
+  this.load.audio('three', 'assets/audio/3.mp3');
+  this.load.audio('four', 'assets/audio/4.mp3');
+  this.load.audio('five', 'assets/audio/5.mp3');
+  this.load.audio('six', 'assets/audio/6.mp3');
+  this.load.audio('seven', 'assets/audio/7.mp3');
+  this.load.audio('eight', 'assets/audio/8.mp3');
+  this.load.audio('nine', 'assets/audio/9.mp3');
+  this.load.audio('zero', 'assets/audio/0.mp3');
+
+  this.load.audio('correct', 'assets/audio/correct.mp3');
+  this.load.audio('wrong', 'assets/audio/wrong.mp3');
 
   // load kuma
   this.load.spritesheet('kuma', 'assets/images/kuma-ani.png', {
@@ -83,16 +93,6 @@ loadingScene.preload = function () {
 
 loadingScene.create = function () {
   // animation
-  this.anims.create({
-    key: 'funnyfaces',
-    frames: this.anims.generateFrameNames('pet', {
-      frames: [1, 2, 3],
-    }),
-    frameRate: 7,
-    yoyo: true,
-    repeat: 0, // to repeat forever: -1
-  });
-
   this.anims.create({
     key: 'left',
     frames: this.anims.generateFrameNumbers('kuma', { start: 0, end: 3 }),
