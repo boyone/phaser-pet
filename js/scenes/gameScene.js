@@ -45,9 +45,13 @@ gameScene.create = function () {
   this.createHud();
   //this.refreshHud();
 
+  this.numbers = this.cache.json.get('game').numbers;
+
   // add sound to numbers
   for (let i = 0; i < 10; i++) {
-    this.numbers[i].sound = this.sound.add(this.numbers[i].value);
+    this.numbers[i].sound = this.sound.add(this.numbers[i].key);
+    this.numbers[i].sound.volume = 0.3;
+    this.numbers[i].sound.rate = 1.1;
   }
 
   this.correct = this.sound.add('correct');
@@ -70,89 +74,13 @@ gameScene.create = function () {
 
 // create ui
 gameScene.createUi = function () {
-  this.oneBtn = this.add.sprite(50, 450, 'one').setInteractive();
-  this.oneBtn.customStats = {
-    health: 10,
-    fun: 15,
-  };
-  this.oneBtn.on('pointerdown', this.pickItem);
-
-  this.twoBtn = this.add.sprite(100, 450, 'two').setInteractive();
-  this.twoBtn.customStats = {
-    health: 10,
-    fun: 15,
-  };
-  this.twoBtn.on('pointerdown', this.pickItem);
-
-  this.threeBtn = this.add.sprite(150, 450, 'three').setInteractive();
-  this.threeBtn.customStats = {
-    health: 10,
-    fun: 15,
-  };
-  this.threeBtn.on('pointerdown', this.pickItem);
-
-  this.fourBtn = this.add.sprite(200, 450, 'four').setInteractive();
-  this.fourBtn.customStats = {
-    health: -10,
-    fun: 15,
-  };
-  this.fourBtn.on('pointerdown', this.pickItem);
-
-  this.fiveBtn = this.add.sprite(250, 450, 'five').setInteractive();
-  this.fiveBtn.customStats = {
-    health: -10,
-    fun: 5,
-  };
-  this.fiveBtn.on('pointerdown', this.pickItem);
-
-  this.sixBtn = this.add.sprite(50, 500, 'six').setInteractive();
-  this.sixBtn.customStats = {
-    health: -10,
-    fun: 15,
-  };
-  this.sixBtn.on('pointerdown', this.pickItem);
-
-  this.sevenBtn = this.add.sprite(100, 500, 'seven').setInteractive();
-  this.sevenBtn.customStats = {
-    health: 10,
-    fun: 15,
-  };
-  this.sevenBtn.on('pointerdown', this.pickItem);
-
-  this.eightBtn = this.add.sprite(150, 500, 'eight').setInteractive();
-  this.eightBtn.customStats = {
-    health: -10,
-    fun: 0,
-  };
-  this.eightBtn.on('pointerdown', this.pickItem);
-
-  this.nineBtn = this.add.sprite(200, 500, 'nine').setInteractive();
-  this.nineBtn.customStats = {
-    health: 10,
-    fun: 15,
-  };
-  this.nineBtn.on('pointerdown', this.pickItem);
-
-  this.zeroBtn = this.add.sprite(250, 500, 'zero').setInteractive();
-  this.zeroBtn.customStats = {
-    health: -10,
-    fun: -15,
-  };
-  this.zeroBtn.on('pointerdown', this.pickItem);
-
-  // array with all buttons
-  this.buttons = [
-    this.oneBtn,
-    this.twoBtn,
-    this.threeBtn,
-    this.fourBtn,
-    this.fiveBtn,
-    this.sixBtn,
-    this.sevenBtn,
-    this.eightBtn,
-    this.nineBtn,
-    this.zeroBtn,
-  ]; // , this.rotateBtn
+  this.buttons = [];
+  for (let i = 0; i < this.numbers.length; i++) {
+    this.buttons[i] = this.add
+      .sprite(this.numbers[i].x, this.numbers[i].y, this.numbers[i].key)
+      .setInteractive();
+    this.buttons[i].on('pointerdown', this.pickItem);
+  }
 
   // ui is not blocked
   this.uiBlocked = false;
@@ -240,10 +168,10 @@ gameScene.randomItem = function () {
       this.kuma.play('turn');
 
       // check this.selectedNumber and this.number
-      console.log(this.number)
+      console.log(this.number);
       if (
         this.number !== -1 &&
-        this.selectedNumber === this.numbers[this.number].value
+        this.selectedNumber === this.numbers[this.number].key
       ) {
         this.correct.play();
 
@@ -262,7 +190,7 @@ gameScene.randomMagicNumber = function () {
     delay: 1000, // ms
     callback: function () {
       this.number = Math.floor(Math.random() * 9);
-      this.magicNumber.setText('Number: ' + this.numbers[this.number].value);
+      this.magicNumber.setText('Number: ' + this.numbers[this.number].key);
 
       //play sound
       this.numbers[this.number].sound.play();

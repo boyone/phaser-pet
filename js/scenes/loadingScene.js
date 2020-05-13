@@ -46,11 +46,8 @@ loadingScene.preload = function () {
   this.load.image('toy', 'assets/images/rubber_duck.png');
 
   // load json data
-  /*this.load.json('numbers', 'assets/json/numbers.json');
-  let x = this.cache.json.get('numbers');
-  for (let number in x.numbers) {
-    this.load.image(number.key, 'assets/' + number.path);
-  }*/
+  this.load.json('game', 'assets/json/numbers.json');
+  
 
   this.load.image('zero', 'assets/images/zero-s.png');
   this.load.image('one', 'assets/images/one-s.png');

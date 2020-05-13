@@ -2,62 +2,62 @@
   "numbers": [
     {
       "key": "one",
-      "path": "images/one.png",
+      "path": "images/one-s.png",
       "x": 50,
       "y": 450
     },
     {
       "key": "two",
-      "path": "images/two.png",
+      "path": "images/two-s.png",
       "x": 100,
       "y": 450
     },
     {
       "key": "three",
-      "path": "images/three.png",
+      "path": "images/three-s.png",
       "x": 150,
       "y": 450
     },
     {
       "key": "four",
-      "path": "images/four.png",
+      "path": "images/four-s.png",
       "x": 200,
       "y": 450
     },
     {
       "key": "five",
-      "path": "images/five.png",
+      "path": "images/five-s.png",
       "x": 250,
       "y": 450
     },
     {
       "key": "six",
-      "path": "images/six.png",
+      "path": "images/six-s.png",
       "x": 50,
       "y": 500
     },
     {
       "key": "seven",
-      "path": "images/seven.png",
-      "x": 50,
+      "path": "images/seven-s.png",
+      "x": 100,
       "y": 500
     },
     {
       "key": "eight",
-      "path": "images/eight.png",
-      "x": 50,
+      "path": "images/eight-s.png",
+      "x": 150,
       "y": 500
     },
     {
       "key": "nine",
-      "path": "images/nine.png",
-      "x": 50,
+      "path": "images/nine-s.png",
+      "x": 200,
       "y": 500
     },
     {
-      "key": "ten",
-      "path": "images/ten.png",
-      "x": 50,
+      "key": "zero",
+      "path": "images/zero-s.png",
+      "x": 250,
       "y": 500
     }
   ]
